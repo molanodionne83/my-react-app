@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useClasses } from './ClassContext'
 
 function NavBar() {
   return (
@@ -157,21 +158,8 @@ function FilterBar({ active, onFilter }) {
 }
 
 function App() {
-  const [classes, setClasses] = useState([
-    { id: 1, name: 'Basic CPR & AED', date: 'June 3, 2026', location: 'Manila Training Center', spots: 8, type: 'basic' },
-    { id: 2, name: 'Advanced Life Support', date: 'June 7, 2026', location: 'Davao Training Center', spots: 5, type: 'advanced' },
-    { id: 3, name: 'Online CPR Certification', date: 'June 10, 2026', location: 'Zoom', spots: 50, type: 'online' },
-  ])
-
+  const { classes, addClass, deleteClass } = useClasses()
   const [filter, setFilter] = useState('all')
-
-  const addClass = (newClass) => {
-    setClasses(prev => [...prev, newClass])
-  }
-
-  const deleteClass = (id) => {
-    setClasses(prev => prev.filter(c => c.id !== id))
-  }
 
   const filtered = filter === 'all'
     ? classes
